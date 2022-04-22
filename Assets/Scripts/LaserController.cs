@@ -14,4 +14,12 @@ public class LaserController : MonoBehaviour
     {   
         r_laser.velocity =  transform.right * laserSpeed; 
     }
+
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
+        if (other.gameObject.CompareTag("Bord"))
+        {
+            Destroy(gameObject); 
+        }
+    }
 }

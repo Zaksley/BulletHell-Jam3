@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     /* Colors  */
     [SerializeField] private Sprite[] sprites; 
     private SpriteRenderer sr; 
+    [SerializeField] private HUDColor hudColor; 
     private int currentSpaceship; 
 
     private int currentColor; 
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
 
         sr = GetComponent<SpriteRenderer>(); 
         sr.sprite = sprites[currentSpaceship];
+        hudColor.modifyColor(currentColor);
 
         layers = new string[7] {"Laser_Player_blue", "Layer_Player_green", "Layer_Player_navyblue",
                   "Layer_Player_orange", "Layer_Player_purple", "Layer_Player_red", 
@@ -89,11 +91,13 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.A)) 
         {
-            currentColor = ((currentColor - 1) % nbColors) > 0 ? (currentSpaceship - 1) % nbColors : nbColors - 1;
+            currentColor = ((currentColor - 1) % nbColors) >= 0 ? (currentSpaceship - 1) % nbColors : nbColors - 1;
         }
 
         currentSpaceship = (currentLevel+1) * currentColor;     
+        hudColor.modifyColor(currentColor);
         sr.sprite = sprites[currentSpaceship];
+
     }
 
     void FixedUpdate() 
@@ -129,8 +133,6 @@ public class PlayerController : MonoBehaviour
             laser.GetComponent<Rigidbody2D>().rotation = r.rotation + 90f; 
             laser.layer = startingLayerLaser + currentColor; 
             laser.GetComponent<SpriteRenderer>().sprite = spritesLaser[currentColor];
-
-            Debug.Log(startingLayerLaser + currentColor);
 
             LaserController lc = laser.GetComponent<LaserController>(); 
             lc.laserSpeed = laserSpeed; 

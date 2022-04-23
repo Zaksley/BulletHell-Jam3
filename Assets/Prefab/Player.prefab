@@ -123,7 +123,15 @@ MonoBehaviour:
   rotateSpeed: 3
   prefabLaser: {fileID: 5847773211304273318, guid: d1c236e3409029447a4dd5e32a0fa627,
     type: 3}
-  laserSpeed: 2.25
+  spritesLaser:
+  - {fileID: 21300000, guid: bd08879913246704186fc25189036440, type: 3}
+  - {fileID: 21300000, guid: 1617cb82b8957224f89b913e4c681bf8, type: 3}
+  - {fileID: 21300000, guid: de997b92d5a37af468856e520d78a747, type: 3}
+  - {fileID: 21300000, guid: 5a509c0b48b77ef408668dac4683b6ab, type: 3}
+  - {fileID: 21300000, guid: 03bf92318e234d94882cb308030d1003, type: 3}
+  - {fileID: 21300000, guid: 70d7a2fb47e37ac4f90416bd87e423f4, type: 3}
+  - {fileID: 21300000, guid: face8c7beb125af42a3d1579148f813f, type: 3}
+  laserSpeed: 2.5
   shootReload: 0.5
   cam: {fileID: 0}
   sprites:

@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     /*  Shoot */ 
     [SerializeField] private GameObject prefabLaser; 
+    [SerializeField] private Sprite[] spritesLaser; 
     public float laserSpeed; 
     public float shootReload; 
 
@@ -26,11 +27,17 @@ public class PlayerController : MonoBehaviour
 
     private GameObject[] shooters; 
 
-    // Colors 
+    /* Colors  */
     [SerializeField] private Sprite[] sprites; 
     private SpriteRenderer sr; 
     private int currentSpaceship; 
+
+    private int currentColor; 
+    private int currentLevel; 
+
     private int nbColors = 7;
+    private string[] layers; 
+    private int startingLayerLaser = 9;
 
     enum Color 
     {
@@ -49,8 +56,16 @@ public class PlayerController : MonoBehaviour
         shooters = GameObject.FindGameObjectsWithTag("Shooter"); 
         StartCoroutine(AutomaticShoot()); 
 
-        currentSpaceship = (int) Color.RED; 
+        currentColor = (int) Color.RED; 
+        currentLevel = 0; 
+        currentSpaceship = (currentLevel+1) * currentColor; 
+
         sr = GetComponent<SpriteRenderer>(); 
+        sr.sprite = sprites[currentSpaceship];
+
+        layers = new string[7] {"Laser_Player_blue", "Layer_Player_green", "Layer_Player_navyblue",
+                  "Layer_Player_orange", "Layer_Player_purple", "Layer_Player_red", 
+                  "Layer_Player_yellow"}; 
     }
 
     // Update is called once per frame
@@ -61,10 +76,6 @@ public class PlayerController : MonoBehaviour
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
-
-        if (Input.GetKeyDown(KeyCode.Space))
-            Shoot(); 
-
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.E))
             ChangeColor(); 
             
@@ -74,13 +85,14 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            currentSpaceship = (currentSpaceship + 1) % nbColors; 
+            currentColor = (currentColor + 1) % nbColors; 
         }
         else if (Input.GetKeyDown(KeyCode.A)) 
         {
-            currentSpaceship = ((currentSpaceship - 1) % nbColors) > 0 ? (currentSpaceship - 1) % nbColors : nbColors - 1;
+            currentColor = ((currentColor - 1) % nbColors) > 0 ? (currentSpaceship - 1) % nbColors : nbColors - 1;
         }
 
+        currentSpaceship = (currentLevel+1) * currentColor;     
         sr.sprite = sprites[currentSpaceship];
     }
 
@@ -97,6 +109,7 @@ public class PlayerController : MonoBehaviour
         movement.Normalize(); 
 
         transform.Translate(movement * speed * magnitude * Time.deltaTime, Space.World); 
+        
     }
 
     private void Rotate()
@@ -114,7 +127,14 @@ public class PlayerController : MonoBehaviour
             GameObject laser; 
             laser = Instantiate(prefabLaser, shooters[i].transform.position, Quaternion.identity);
             laser.GetComponent<Rigidbody2D>().rotation = r.rotation + 90f; 
-            laser.GetComponent<LaserController>().laserSpeed = laserSpeed; 
+            laser.layer = startingLayerLaser + currentColor; 
+            laser.GetComponent<SpriteRenderer>().sprite = spritesLaser[currentColor];
+
+            Debug.Log(startingLayerLaser + currentColor);
+
+            LaserController lc = laser.GetComponent<LaserController>(); 
+            lc.laserSpeed = laserSpeed; 
+            
         }
     }
 

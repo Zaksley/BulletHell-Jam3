@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5746815292087623083}
   - component: {fileID: 5999345986815973795}
   - component: {fileID: 5143649740794151778}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5847773211304273318}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -0.5695398, y: 1.0112284, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -137,7 +137,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2806, y: 0.1984}
+    oldSize: {x: 0.9353333, y: 0.6613333}
     newSize: {x: 14.03, y: 9.92}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

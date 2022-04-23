@@ -6,6 +6,8 @@ public class TurretProjectile : MonoBehaviour
 {
 
     [SerializeField] private Sprite[] sprite_colors; 
+    private string[] layersProjectile;
+    private int startingLayerProjectile = 16; 
 
     [SerializeField] private float nbProjectile; 
     [SerializeField] private float projectileReload; 
@@ -22,6 +24,7 @@ public class TurretProjectile : MonoBehaviour
     {
         StartCoroutine(ShootProjectile()); 
         r = GetComponent<Rigidbody2D>(); 
+        layersProjectile = new string[7] {"Projectile_blue", "Projectile_green", "Projectile_navyblue", "Projectile_orange", "Projectile_purple", "Projectile_red", "Projectile_yellow" }; 
     }
 
     void Update() 
@@ -31,7 +34,7 @@ public class TurretProjectile : MonoBehaviour
 
     private int getColor() 
     {
-        int c = Random.Range(0, sprite_colors.Length-1); 
+        int c = Random.Range(0, sprite_colors.Length); 
         return c; 
     }
 
@@ -50,6 +53,7 @@ public class TurretProjectile : MonoBehaviour
                 projectile.GetComponent<SpriteRenderer>().sprite = sprite_colors[color]; 
                 projectile.GetComponent<ProjectileController>().speed = projectileSpeed; 
                 projectile.GetComponent<ProjectileController>().ProjectileShoot(); 
+                projectile.layer = startingLayerProjectile + color;
                 yield return new WaitForSeconds(timeFlick);
                 
             }

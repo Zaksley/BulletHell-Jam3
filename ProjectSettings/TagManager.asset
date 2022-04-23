@@ -16,22 +16,22 @@ TagManager:
   - Water
   - UI
   - Player
-  - Laser_Player
-  - Projectiles
   - Bord
   - Turret
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Laser_Player_blue
+  - Laser_Player_green
+  - Laser_Player_navyblue
+  - Laser_Player_orange
+  - Laser_Player_purple
+  - Laser_Player_red
+  - Laser_Player_yellow
+  - Projectile_blue
+  - Projectile_green
+  - Projectile_navyblue
+  - Projectile_orange
+  - Projectile_purple
+  - Projectile_red
+  - Projectile_yellow
   - 
   - 
   - 

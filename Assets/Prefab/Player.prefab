@@ -119,11 +119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c27cc1b331b8bd042bf699cc549dab3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2
   rotateSpeed: 3
   prefabLaser: {fileID: 5847773211304273318, guid: d1c236e3409029447a4dd5e32a0fa627,
     type: 3}
-  laserSpeed: 0
+  laserSpeed: 2.25
+  shootReload: 0.5
   cam: {fileID: 0}
 --- !u!60 &2047422893479341995
 PolygonCollider2D:

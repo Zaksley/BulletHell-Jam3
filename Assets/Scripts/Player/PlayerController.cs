@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour
 
     /*  Shoot */ 
     [SerializeField] private GameObject prefabLaser; 
-    private bool isShooting;
     public float laserSpeed; 
+    public float shootReload; 
 
 
     private Rigidbody2D r; 
@@ -29,9 +29,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         r = GetComponent<Rigidbody2D>(); 
-        isShooting = false; 
-       // positionToShoot = GetComponentInChildren<GameObject>(); 
        shooters = GameObject.FindGameObjectsWithTag("Shooter"); 
+       StartCoroutine(AutomaticShoot()); 
     }
 
     // Update is called once per frame
@@ -73,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot() 
     {
-        //Instantiate(laser, positionToShoot.transform.position, Quaternion.identity); 
+
         for (int i=0; i<shooters.Length; i++)
         {
             GameObject laser; 
@@ -82,4 +81,15 @@ public class PlayerController : MonoBehaviour
             laser.GetComponent<LaserController>().laserSpeed = laserSpeed; 
         }
     }
+
+    IEnumerator AutomaticShoot()
+    {
+        while(true) 
+        {
+            yield return new WaitForSeconds(shootReload);
+            Shoot(); 
+        }
+
+    }
+
 }

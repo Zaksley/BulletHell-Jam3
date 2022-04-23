@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Shooter
+  - Bord
+  - Turret
+  - Projectile
   layers:
   - Default
   - TransparentFX

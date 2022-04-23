@@ -134,9 +134,9 @@ GameObject:
   - component: {fileID: 507809965}
   - component: {fileID: 507809964}
   - component: {fileID: 507809963}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bord (1)
-  m_TagString: Untagged
+  m_TagString: Bord
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -326,9 +326,9 @@ GameObject:
   - component: {fileID: 636088678}
   - component: {fileID: 636088677}
   - component: {fileID: 636088676}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bord (2)
-  m_TagString: Untagged
+  m_TagString: Bord
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -424,6 +424,68 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1137498331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1137498333}
+  - component: {fileID: 1137498332}
+  - component: {fileID: 1137498334}
+  m_Layer: 0
+  m_Name: Turret
+  m_TagString: Turret
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1137498332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137498331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf5947a08705ff4692607551c49b487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.2
+--- !u!4 &1137498333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137498331}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.74, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1137498334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137498331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e41bae00b38f640a659a86dadbdd8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nbProjectile: 1
+  projectileReload: 2
+  prefabProjectile: {fileID: 4230251548341088318, guid: 31a3190eb1932734692089daf5c92146,
+    type: 3}
+  projectileSpeed: 2
 --- !u!1 &1384625389
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,9 +497,9 @@ GameObject:
   - component: {fileID: 1384625392}
   - component: {fileID: 1384625391}
   - component: {fileID: 1384625390}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bord
-  m_TagString: Untagged
+  m_TagString: Bord
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -544,9 +606,9 @@ GameObject:
   - component: {fileID: 1459307877}
   - component: {fileID: 1459307876}
   - component: {fileID: 1459307875}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bord (3)
-  m_TagString: Untagged
+  m_TagString: Bord
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -780,11 +842,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 8483215341755278141, guid: 6e8fe1287fb06f74e9067e351128af20,
-        type: 3}
-      propertyPath: laserSpeed
-      value: 1.75
-      objectReference: {fileID: 0}
     - target: {fileID: 8483215342330869642, guid: 6e8fe1287fb06f74e9067e351128af20,
         type: 3}
       propertyPath: m_Layer

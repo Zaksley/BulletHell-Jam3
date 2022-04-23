@@ -10,5 +10,6 @@ public class GizmosPosToShoot : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(transform.position, radius); 
+
     }
 }

@@ -26,11 +26,31 @@ public class PlayerController : MonoBehaviour
 
     private GameObject[] shooters; 
 
+    // Colors 
+    [SerializeField] private Sprite[] sprites; 
+    private SpriteRenderer sr; 
+    private int currentSpaceship; 
+    private int nbColors = 7;
+
+    enum Color 
+    {
+        BLUE = 0,
+        GREEN = 1,
+        NAVY_BLUE = 2,
+        ORANGE = 3,
+        PURPLE = 4,
+        RED = 5,
+        YELLOW = 6
+    }; 
+
     void Start()
     {
         r = GetComponent<Rigidbody2D>(); 
-       shooters = GameObject.FindGameObjectsWithTag("Shooter"); 
-       StartCoroutine(AutomaticShoot()); 
+        shooters = GameObject.FindGameObjectsWithTag("Shooter"); 
+        StartCoroutine(AutomaticShoot()); 
+
+        currentSpaceship = (int) Color.RED; 
+        sr = GetComponent<SpriteRenderer>(); 
     }
 
     // Update is called once per frame
@@ -43,9 +63,25 @@ public class PlayerController : MonoBehaviour
 
 
         if (Input.GetKeyDown(KeyCode.Space))
-        {
             Shoot(); 
+
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.E))
+            ChangeColor(); 
+            
+    }
+
+    void ChangeColor() 
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            currentSpaceship = (currentSpaceship + 1) % nbColors; 
         }
+        else if (Input.GetKeyDown(KeyCode.A)) 
+        {
+            currentSpaceship = ((currentSpaceship - 1) % nbColors) > 0 ? (currentSpaceship - 1) % nbColors : nbColors - 1;
+        }
+
+        sr.sprite = sprites[currentSpaceship];
     }
 
     void FixedUpdate() 

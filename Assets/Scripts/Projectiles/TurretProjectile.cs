@@ -5,6 +5,8 @@ using UnityEngine;
 public class TurretProjectile : MonoBehaviour
 {
 
+    [SerializeField] private Sprite[] sprite_colors; 
+
     [SerializeField] private float nbProjectile; 
     [SerializeField] private float projectileReload; 
     [SerializeField] private GameObject prefabProjectile; 
@@ -27,21 +29,25 @@ public class TurretProjectile : MonoBehaviour
         transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime); 
     }
 
+    private int getColor() 
+    {
+        int c = Random.Range(0, sprite_colors.Length-1); 
+        return c; 
+    }
+
     IEnumerator ShootProjectile() 
     {
         while(true) 
         {
             yield return new WaitForSeconds(projectileReload);
+            
+            int color = getColor(); 
             for(int i=0; i < nbProjectile; i++)
             {
-                
                 GameObject projectile; 
-
-                //float angle = Quaternion.Angle(Quaternion.Euler(new Vector3(0,0,0)), transform.rotation);
-                // Debug.Log(angle); 
-                //Quaternion projectileRotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 projectile = Instantiate(prefabProjectile, projectileShooter.transform.position, Quaternion.identity);
                 projectile.transform.rotation = transform.rotation; 
+                projectile.GetComponent<SpriteRenderer>().sprite = sprite_colors[color]; 
                 projectile.GetComponent<ProjectileController>().speed = projectileSpeed; 
                 projectile.GetComponent<ProjectileController>().ProjectileShoot(); 
                 yield return new WaitForSeconds(timeFlick);

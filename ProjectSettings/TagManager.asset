@@ -8,6 +8,7 @@ TagManager:
   - Bord
   - Turret
   - Projectile
+  - CourbeShooter
   layers:
   - Default
   - TransparentFX

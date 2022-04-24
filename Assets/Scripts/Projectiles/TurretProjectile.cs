@@ -19,6 +19,11 @@ public class TurretProjectile : MonoBehaviour
     [SerializeField] private float rotateSpeed = 1f; 
     private Rigidbody2D r; 
 
+    [SerializeField] private bool isRotativeTurret = true; 
+    [SerializeField] private float angleMax = -0.15f;
+    [SerializeField] private float angleMin = -0.98f;
+    [SerializeField] private bool isGoingRight = true; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +34,30 @@ public class TurretProjectile : MonoBehaviour
 
     void Update() 
     {
-        transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime); 
+        if (isRotativeTurret) 
+        {
+            Vector3 rotate;  
+
+            if (isGoingRight)
+            {
+                rotate = Vector3.forward * rotateSpeed * Time.deltaTime;
+                if (transform.rotation.z >= angleMax) 
+                {
+                    rotate = -1 * Vector3.forward * rotateSpeed * Time.deltaTime;
+                    isGoingRight = false; 
+                }
+            }
+            else
+            {
+                rotate = -1 * Vector3.forward * rotateSpeed * Time.deltaTime;
+                if (transform.rotation.z <= angleMin) 
+                {
+                    rotate = 1 * Vector3.forward * rotateSpeed * Time.deltaTime;
+                    isGoingRight = true; 
+                }
+            }
+            transform.Rotate(rotate, Space.World);
+        }
     }
 
     private int getColor() 
@@ -54,6 +82,7 @@ public class TurretProjectile : MonoBehaviour
                 projectile.GetComponent<ProjectileController>().speed = projectileSpeed; 
                 projectile.GetComponent<ProjectileController>().ProjectileShoot(); 
                 projectile.layer = startingLayerProjectile + color;
+
                 yield return new WaitForSeconds(timeFlick);
                 
             }

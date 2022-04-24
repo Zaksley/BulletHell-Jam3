@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     /*  Shoot */ 
     [SerializeField] private GameObject prefabLaser; 
     [SerializeField] private Sprite[] spritesLaser; 
+    [SerializeField] private Sprite[] spritesCourbeLaser; 
     public float laserSpeed; 
     public float laserSize; 
     public float shootReload; 
@@ -29,6 +30,9 @@ public class PlayerController : MonoBehaviour
 
     private GameObject[] shooters; 
     private int[] nbShooters; 
+
+    private GameObject[] courbeShooters; 
+    private int[] nbCourbeShooters; 
 
     /* Colors  */
     [SerializeField] private Sprite[] sprites; 
@@ -67,7 +71,11 @@ public class PlayerController : MonoBehaviour
     {
         r = GetComponent<Rigidbody2D>(); 
         shooters = GameObject.FindGameObjectsWithTag("Shooter"); 
-        nbShooters = new int[6] {1, 2, 3, 4, 4, 4}; 
+        nbShooters = new int[6] {1, 2, 3, 4, 5, 6}; 
+
+        courbeShooters = GameObject.FindGameObjectsWithTag("CourbeShooter"); 
+        nbCourbeShooters = new int[6] {0, 0, 0, 0, 0, 0}; 
+
         StartCoroutine(AutomaticShoot()); 
 
         currentColor = (int) Color.RED; 
@@ -152,11 +160,15 @@ public class PlayerController : MonoBehaviour
     private void Shoot() 
     {
 
-        int j = 0; 
+        int indexShoot = 0; 
+        int indexCourbeShoot = 0; 
         int search = 0; 
+        
+        // Gets index from where to start
         while(search != currentLevel)
         {
-            j += nbShooters[search]; 
+            indexShoot += nbShooters[search]; 
+            indexCourbeShoot += nbCourbeShooters[search]; 
             search++; 
         }
 
@@ -164,7 +176,7 @@ public class PlayerController : MonoBehaviour
         {
             GameObject laser; 
 
-            laser = Instantiate(prefabLaser, shooters[j+i].transform.position, Quaternion.identity);
+            laser = Instantiate(prefabLaser, shooters[indexShoot+i].transform.position, Quaternion.identity);
             laser.GetComponent<Rigidbody2D>().rotation = r.rotation; 
             laser.transform.rotation = transform.rotation; 
             laser.layer = startingLayerLaser + currentColor; 
@@ -174,6 +186,22 @@ public class PlayerController : MonoBehaviour
             LaserController lc = laser.GetComponent<LaserController>(); 
             lc.laserSpeed = laserSpeed; 
         }
+
+        /*
+        for(int i=0; i<nbCourbeShooters[currentLevel]; i++)
+        {
+            GameObject courbeLaser; 
+
+            courbeLaser = Instantiate(prefabLaser, shooters[indexCourbeShoot+i].transform.position, Quaternion.identity);
+            courbeLaser.GetComponent<Rigidbody2D>().rotation = r.rotation; 
+            courbeLaser.transform.rotation = transform.rotation; 
+            courbeLaser.layer = startingLayerLaser + currentColor; 
+            courbeLaser.GetComponent<SpriteRenderer>().sprite = spritesCourbeLaser[currentColor];
+
+            LaserController lc = courbeLaser.GetComponent<LaserController>(); 
+            lc.laserSpeed = laserSpeed; 
+        }
+        */
     }
 
     IEnumerator AutomaticShoot()

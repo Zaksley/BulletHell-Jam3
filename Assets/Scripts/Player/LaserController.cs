@@ -29,7 +29,6 @@ public class LaserController : MonoBehaviour
 
             player.GetComponent<PlayerController>().cristalCurrency += player.GetComponent<PlayerController>().cristalGain; 
             player.GetComponent<PlayerController>().ChangeCrystalUI(); 
-            Debug.Log(player.GetComponent<PlayerController>().cristalCurrency); 
         }
     }
 }

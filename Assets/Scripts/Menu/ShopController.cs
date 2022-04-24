@@ -12,6 +12,7 @@ public class ShopController : MonoBehaviour
     [SerializeField] private ButtonController laserSizeButton; 
     [SerializeField] private ButtonController cristalGainButton; 
     private ButtonController[] buttonsUpgrade; 
+    [SerializeField] private int[] pricesUpgrade;
     [SerializeField] private int levelMax = 10; 
 
     /* Spaceships */
@@ -31,10 +32,22 @@ public class ShopController : MonoBehaviour
     {
         buttonsUpgrade = new ButtonController[5] {reloadButton, playerSpeedButton, laserSpeedButton, laserSizeButton, cristalGainButton}; 
         buttonsSpaceship = new ButtonShipController[6] {Ship0, Ship1, Ship2,Ship3,Ship4,Ship5}; 
+        pricesUpgrade = new int[10] {100, 250, 500, 750, 1000, 1500, 2000, 3000, 4000, 5000}; 
+        pricesSpaceship = new int[6] {0, 1000, 3000, 5000, 10000, 15000}; 
 
-        // Setup first ship 
+        // Setup ships  
         int firstShip = 0; 
         buttonsSpaceship[firstShip].UpdateState("Selected"); 
+        for(int i=1; i<pricesSpaceship.Length; i++)
+        {
+            buttonsSpaceship[i].InitializePrice(pricesSpaceship[i]); 
+        }
+
+        // Setup upgrades 
+        for(int i=0; i<buttonsUpgrade.Length; i++)
+        {
+            buttonsUpgrade[i].InitializePrice(pricesUpgrade[0]); 
+        }
 
     }
 
@@ -100,7 +113,10 @@ public class ShopController : MonoBehaviour
         {
             if (playerControl.cristalCurrency >= bc.price) 
             {
-                bc.UpdatePrice(); 
+                // Handle out of range but still upgrade ship
+                if (bc.level+1 == levelMax) bc.UpdatePrice(0); 
+                else bc.UpdatePrice(pricesUpgrade[bc.level+1]); 
+
                 playerControl.cristalCurrency -= bc.price; 
 
                 if (bc.level == levelMax)

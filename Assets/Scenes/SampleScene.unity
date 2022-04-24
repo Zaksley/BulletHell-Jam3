@@ -2736,6 +2736,7 @@ MonoBehaviour:
   laserSpeedButton: {fileID: 1785412544}
   laserSizeButton: {fileID: 754133648}
   cristalGainButton: {fileID: 1474872590}
+  pricesUpgrade: 
   levelMax: 10
   Ship0: {fileID: 1313650739}
   Ship1: {fileID: 811014919}
@@ -2743,6 +2744,7 @@ MonoBehaviour:
   Ship3: {fileID: 403347869}
   Ship4: {fileID: 998228704}
   Ship5: {fileID: 1127299685}
+  pricesSpaceship: 
   playerControl: {fileID: 295083879}
 --- !u!1 &752338304
 GameObject:
@@ -8280,6 +8282,11 @@ PrefabInstance:
       propertyPath: hudColor
       value: 
       objectReference: {fileID: 59048202}
+    - target: {fileID: 8483215341755278141, guid: 6e8fe1287fb06f74e9067e351128af20,
+        type: 3}
+      propertyPath: cristalCurrency
+      value: 500000
+      objectReference: {fileID: 0}
     - target: {fileID: 8483215342330869642, guid: 6e8fe1287fb06f74e9067e351128af20,
         type: 3}
       propertyPath: m_Layer

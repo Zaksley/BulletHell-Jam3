@@ -14,26 +14,17 @@ public class ButtonController : MonoBehaviour
     public int level = 0; 
     public int price = 200; 
 
-    
-
-    // Start is called before the first frame update
-    void Start()
+    public void InitializePrice(int value) 
     {
-        // Initiate price & levels
-        priceText.GetComponent<TMP_Text>().text = price.ToString(); 
+        price = value; 
+        priceText.GetComponent<TMP_Text>().text = price.ToString();
         levelText.GetComponent<TMP_Text>().text = level.ToString(); 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     // Incrementing price & level 
-    public void UpdatePrice() 
+    public void UpdatePrice(int newPrice) 
     {
-        price += 50; 
+        price = newPrice; 
         level += 1;
         priceText.GetComponent<TMP_Text>().text = price.ToString(); 
         levelText.GetComponent<TMP_Text>().text = level.ToString(); 

@@ -12,15 +12,10 @@ public class ButtonShipController : MonoBehaviour
     [SerializeField] private Image shardImage; 
     public int price = 100;
 
-    void Start()
+    public void InitializePrice(int value) 
     {
-        priceText.GetComponent<TMP_Text>().text = price.ToString(); 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        price = value; 
+        priceText.GetComponent<TMP_Text>().text = price.ToString();
     }
 
     public void UpdateState(string state) 

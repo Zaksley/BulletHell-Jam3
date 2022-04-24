@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class PlayerController : MonoBehaviour
 {
     
     /* Movement */
     float rotation; 
-    [SerializeField] float speed; 
+    public float speed; 
     [SerializeField] float rotateSpeed; 
     private Vector2 movement; 
 
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject prefabLaser; 
     [SerializeField] private Sprite[] spritesLaser; 
     public float laserSpeed; 
+    public float laserSize; 
     public float shootReload; 
 
 
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 mousePos; 
 
     private GameObject[] shooters; 
+    private int[] nbShooters; 
 
     /* Colors  */
     [SerializeField] private Sprite[] sprites; 
@@ -42,8 +45,12 @@ public class PlayerController : MonoBehaviour
     private string[] layers; 
     private int startingLayerLaser = 9;
 
+
     /* Buy */ 
     public int cristalCurrency = 500000;
+    public int cristalGain = 50; 
+    public GameObject cristalText; 
+                        
 
     enum Color 
     {
@@ -60,6 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         r = GetComponent<Rigidbody2D>(); 
         shooters = GameObject.FindGameObjectsWithTag("Shooter"); 
+        nbShooters = new int[6] {1, 2, 3, 4, 4, 4}; 
         StartCoroutine(AutomaticShoot()); 
 
         currentColor = (int) Color.RED; 
@@ -74,6 +82,9 @@ public class PlayerController : MonoBehaviour
         layers = new string[7] {"Laser_Player_blue", "Layer_Player_green", "Layer_Player_navyblue",
                   "Layer_Player_orange", "Layer_Player_purple", "Layer_Player_red", 
                   "Layer_Player_yellow"}; 
+
+
+        cristalText.GetComponent<TMP_Text>().text = cristalCurrency.ToString();
     }
 
     // Update is called once per frame
@@ -112,11 +123,15 @@ public class PlayerController : MonoBehaviour
         sr.sprite = sprites[currentSpaceship];
     }
 
+    public void ChangeCrystalUI() 
+    {
+        cristalText.GetComponent<TMP_Text>().text = cristalCurrency.ToString();
+    }
+
     void FixedUpdate() 
     {
         Move(); 
         Rotate(); 
-
     }
 
     private void Move()
@@ -125,7 +140,6 @@ public class PlayerController : MonoBehaviour
         movement.Normalize(); 
 
         transform.Translate(movement * speed * magnitude * Time.deltaTime, Space.World); 
-        
     }
 
     private void Rotate()
@@ -138,17 +152,27 @@ public class PlayerController : MonoBehaviour
     private void Shoot() 
     {
 
-        for (int i=0; i<shooters.Length; i++)
+        int j = 0; 
+        int search = 0; 
+        while(search != currentLevel)
+        {
+            j += nbShooters[search]; 
+            search++; 
+        }
+
+        for(int i=0; i<nbShooters[currentLevel]; i++)
         {
             GameObject laser; 
-            laser = Instantiate(prefabLaser, shooters[i].transform.position, Quaternion.identity);
-            laser.GetComponent<Rigidbody2D>().rotation = r.rotation + 90f; 
+
+            laser = Instantiate(prefabLaser, shooters[j+i].transform.position, Quaternion.identity);
+            laser.GetComponent<Rigidbody2D>().rotation = r.rotation; 
+            laser.transform.rotation = transform.rotation; 
             laser.layer = startingLayerLaser + currentColor; 
+            laser.transform.localScale = new Vector3(laserSize, laserSize, laserSize); 
             laser.GetComponent<SpriteRenderer>().sprite = spritesLaser[currentColor];
 
             LaserController lc = laser.GetComponent<LaserController>(); 
             lc.laserSpeed = laserSpeed; 
-            
         }
     }
 
@@ -159,7 +183,5 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(shootReload);
             Shoot(); 
         }
-
     }
-
 }

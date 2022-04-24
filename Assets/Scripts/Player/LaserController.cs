@@ -8,11 +8,12 @@ public class LaserController : MonoBehaviour
     public float laserSpeed;
   
     [SerializeField] private Rigidbody2D r_laser; 
-
+    private GameObject player; 
 
     void Update()
     {   
-        r_laser.velocity =  transform.right * laserSpeed; 
+        r_laser.velocity =  transform.up * laserSpeed; 
+        player = GameObject.FindGameObjectWithTag("Player"); 
     }
 
     private void OnCollisionEnter2D(Collision2D other) 
@@ -25,6 +26,10 @@ public class LaserController : MonoBehaviour
         {
             Destroy(gameObject); 
             Destroy(other.gameObject);
+
+            player.GetComponent<PlayerController>().cristalCurrency += player.GetComponent<PlayerController>().cristalGain; 
+            player.GetComponent<PlayerController>().ChangeCrystalUI(); 
+            Debug.Log(player.GetComponent<PlayerController>().cristalCurrency); 
         }
     }
 }

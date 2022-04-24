@@ -67,6 +67,8 @@ public class ShopController : MonoBehaviour
             if (playerControl.cristalCurrency >= bsc.price) 
             {
                 playerControl.cristalCurrency -= bsc.price; 
+                playerControl.ChangeCrystalUI(); 
+
                 playerControl.ownSpaceShip[indexButton] = true; 
                 TakeSpaceShip(indexButton); 
                 bsc.UpdateState("Selected"); 
@@ -113,14 +115,46 @@ public class ShopController : MonoBehaviour
         {
             if (playerControl.cristalCurrency >= bc.price) 
             {
+
+                playerControl.cristalCurrency -= bc.price; 
+                playerControl.ChangeCrystalUI(); 
+
                 // Handle out of range but still upgrade ship
                 if (bc.level+1 == levelMax) bc.UpdatePrice(0); 
                 else bc.UpdatePrice(pricesUpgrade[bc.level+1]); 
 
-                playerControl.cristalCurrency -= bc.price; 
+
 
                 if (bc.level == levelMax)
                    bc.UpdateMaxLevel(); 
+
+
+                switch(indexButton)
+                {
+                    case 0: 
+                        playerControl.shootReload -= 0.025f; 
+                        break; 
+
+                    case 1:
+                        playerControl.speed += 0.2f; 
+                        break; 
+                    
+                    case 2:
+                        playerControl.laserSpeed += 0.1f; 
+                        break; 
+
+                    case 3:
+                        playerControl.laserSize += 0.1f; 
+                        break; 
+                    
+                    case 4:
+                        playerControl.cristalGain += 10; 
+                        break; 
+
+                    default:
+                        Debug.Log("problem in shop controller"); 
+                        break; 
+                }
             }
         }
 

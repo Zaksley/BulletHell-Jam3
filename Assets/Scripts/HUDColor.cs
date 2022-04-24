@@ -15,7 +15,6 @@ public class HUDColor : MonoBehaviour
         {
             if (i == indexColor) 
             {
-                Debug.Log(i);
                 squareColors[i].transform.localScale = new Vector3(1.5f, 1.5f, 0); 
             }
             else 

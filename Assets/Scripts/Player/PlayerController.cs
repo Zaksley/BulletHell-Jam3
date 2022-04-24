@@ -34,11 +34,16 @@ public class PlayerController : MonoBehaviour
     private int currentSpaceship; 
 
     private int currentColor; 
-    private int currentLevel; 
+    public int currentLevel; 
+
+    public bool[] ownSpaceShip; 
 
     private int nbColors = 7;
     private string[] layers; 
     private int startingLayerLaser = 9;
+
+    /* Buy */ 
+    public int cristalCurrency = 500000;
 
     enum Color 
     {
@@ -59,7 +64,8 @@ public class PlayerController : MonoBehaviour
 
         currentColor = (int) Color.RED; 
         currentLevel = 0; 
-        currentSpaceship = (currentLevel+1) * currentColor; 
+        currentSpaceship = currentLevel * nbColors + currentColor;
+        ownSpaceShip = new bool[6] {true, false, false, false, false, false}; 
 
         sr = GetComponent<SpriteRenderer>(); 
         sr.sprite = sprites[currentSpaceship];
@@ -94,10 +100,16 @@ public class PlayerController : MonoBehaviour
             currentColor = ((currentColor - 1) % nbColors) >= 0 ? (currentSpaceship - 1) % nbColors : nbColors - 1;
         }
 
-        currentSpaceship = (currentLevel+1) * currentColor;     
+        currentSpaceship = currentLevel * nbColors + currentColor;   
         hudColor.modifyColor(currentColor);
         sr.sprite = sprites[currentSpaceship];
+    }
 
+    public void ChangeSpaceShip(int indexSpaceship) 
+    {
+        currentLevel = indexSpaceship; 
+        currentSpaceship = currentLevel * nbColors + currentColor;
+        sr.sprite = sprites[currentSpaceship];
     }
 
     void FixedUpdate() 

@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(AutomaticShoot()); 
 
-        currentColor = (int) Color.RED; 
+        currentColor = (int) Color.BLUE; 
         currentLevel = 0; 
         currentSpaceship = currentLevel * nbColors + currentColor;
         ownSpaceShip = new bool[6] {true, false, false, false, false, false}; 

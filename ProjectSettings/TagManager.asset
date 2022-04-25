@@ -11,6 +11,9 @@ TagManager:
   - CourbeShooter
   - Lanceur
   - LifePlayer
+  - Bonus
+  - Missile
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -35,8 +38,8 @@ TagManager:
   - Projectile_purple
   - Projectile_red
   - Projectile_yellow
-  - 
-  - 
+  - IgnoreAllExceptPlayer
+  - Missile
   - 
   - 
   - 
@@ -50,4 +53,16 @@ TagManager:
     locked: 0
   - name: Turrets
     uniqueID: 2639292001
+    locked: 0
+  - name: Bonus
+    uniqueID: 4214210049
+    locked: 0
+  - name: Laser
+    uniqueID: 850862083
+    locked: 0
+  - name: Player
+    uniqueID: 2194121031
+    locked: 0
+  - name: Projectile
+    uniqueID: 3430928649
     locked: 0

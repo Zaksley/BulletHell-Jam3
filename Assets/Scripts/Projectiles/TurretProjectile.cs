@@ -15,6 +15,7 @@ public class TurretProjectile : MonoBehaviour
     [SerializeField] private GameObject prefabProjectile; 
     [SerializeField] private float projectileSpeed = 2; 
     [SerializeField] private GameObject projectileShooter; 
+    [SerializeField] private GameObject target; 
 
     public float timeFlick = 0.3f; 
     [SerializeField] private float rotateSpeed = 1f; 
@@ -86,8 +87,9 @@ public class TurretProjectile : MonoBehaviour
         for(int i=0; i < nbProjectile; i++)
         {
             GameObject projectile; 
+
             projectile = Instantiate(prefabProjectile, projectileShooter.transform.position, Quaternion.identity);
-            projectile.transform.rotation = transform.rotation; 
+            projectile.transform.rotation = projectileShooter.transform.rotation; 
             projectile.GetComponent<SpriteRenderer>().sprite = sprite_colors[color]; 
             projectile.GetComponent<ProjectileController>().speed = projectileSpeed; 
             projectile.GetComponent<ProjectileController>().ProjectileShoot(); 

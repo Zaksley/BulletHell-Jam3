@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     /* Lives */
     private int lives; 
     [SerializeField] private int StartLives = 10; 
-    private GameObject[] dots; 
+    [SerializeField] private GameObject[] dots; 
 
     enum Color 
     {

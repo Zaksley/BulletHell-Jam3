@@ -17,8 +17,10 @@ public class PlayerController : MonoBehaviour
     
     /* Sound */
     public AudioSource s; 
+    public float volume = 1f; 
     public AudioClip shoot; 
-    public AudioClip mainMusic; 
+    public AudioClip hit; 
+    public AudioClip changeColor; 
 
     /*  Shoot */ 
     [SerializeField] private GameObject prefabLaser; 
@@ -81,8 +83,6 @@ public class PlayerController : MonoBehaviour
     {
         lives = StartLives; 
 
-        s.PlayOneShot(mainMusic);
-
         r = GetComponent<Rigidbody2D>(); 
         shooters = GameObject.FindGameObjectsWithTag("Shooter"); 
         nbShooters = new int[6] {1, 2, 3, 4, 5, 6}; 
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
 
         cristalText.GetComponent<TMP_Text>().text = cristalCurrency.ToString();
 
-        dots = GameObject.FindGameObjectsWithTag("LifePlayer");
+        //dots = GameObject.FindGameObjectsWithTag("LifePlayer");
         
     }
 
@@ -150,6 +150,9 @@ public class PlayerController : MonoBehaviour
         currentSpaceship = currentLevel * nbColors + currentColor;   
         hudColor.modifyColor(currentColor);
         sr.sprite = sprites[currentSpaceship];
+
+        s.volume = volume; 
+        s.PlayOneShot(changeColor); 
     }
 
     public void ChangeSpaceShip(int indexSpaceship) 
@@ -200,6 +203,7 @@ public class PlayerController : MonoBehaviour
             search++; 
         }
 
+        s.volume = volume; 
         s.PlayOneShot(shoot); 
 
         for(int i=0; i<nbShooters[currentLevel]; i++)
@@ -246,6 +250,8 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage() 
     {
         lives -= 1; 
+        s.volume = volume; 
+        s.PlayOneShot(hit); 
     }
 
     private void DeathPlayer()

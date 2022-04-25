@@ -15,7 +15,7 @@ public class LaserController : MonoBehaviour
 
     private void Start() 
     {
-        s = GameObject.Find("Audio").GetComponent<AudioSource>(); 
+        s = GameObject.Find("Audio2").GetComponent<AudioSource>(); 
     }
 
     void Update()

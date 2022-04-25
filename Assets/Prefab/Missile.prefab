@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMissile: 2
-  explosion: {fileID: 8300000, guid: f9fad0bea7ddda349a42d1026caf521f, type: 3}
+  explosion: {fileID: 8300000, guid: c770175bdae443b47bb6df0dad435ad9, type: 3}
 --- !u!61 &442247965976059689
 BoxCollider2D:
   m_ObjectHideFlags: 0

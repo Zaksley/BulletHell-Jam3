@@ -15,7 +15,7 @@ public class MissileController : MonoBehaviour
     void Start() 
     {
         target = GameObject.Find("Boss"); 
-        s = GameObject.Find("Audio").GetComponent<AudioSource>(); 
+        s = GameObject.Find("Audio2").GetComponent<AudioSource>(); 
     }
 
     
@@ -31,7 +31,7 @@ public class MissileController : MonoBehaviour
         if (transform.position == targetBoss.transform.position)
         {
             Destroy(gameObject);
-            //s.PlayOneShot(explosion);
+            s.PlayOneShot(explosion);
             target.GetComponent<BossManager>().BossHit(); 
         }
     }

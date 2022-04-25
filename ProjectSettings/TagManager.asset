@@ -9,6 +9,8 @@ TagManager:
   - Turret
   - Projectile
   - CourbeShooter
+  - Lanceur
+  - LifePlayer
   layers:
   - Default
   - TransparentFX

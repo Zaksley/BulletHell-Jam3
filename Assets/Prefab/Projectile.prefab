@@ -121,6 +121,7 @@ MonoBehaviour:
   speed: 1
   target: {fileID: 0}
   r_projectile: {fileID: -5980197908632821028}
+  player: {fileID: 8483215341755278141, guid: 6e8fe1287fb06f74e9067e351128af20, type: 3}
 --- !u!58 &6992731328915409225
 CircleCollider2D:
   m_ObjectHideFlags: 0

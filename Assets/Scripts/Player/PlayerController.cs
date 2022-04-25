@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement; 
+
 public class PlayerController : MonoBehaviour
 {
     
@@ -56,8 +58,9 @@ public class PlayerController : MonoBehaviour
     public GameObject cristalText; 
 
     /* Lives */
-    public int lives = 7; 
-                        
+    private int lives; 
+    [SerializeField] private int StartLives = 10; 
+    private GameObject[] dots; 
 
     enum Color 
     {
@@ -72,6 +75,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        lives = StartLives; 
+
         r = GetComponent<Rigidbody2D>(); 
         shooters = GameObject.FindGameObjectsWithTag("Shooter"); 
         nbShooters = new int[6] {1, 2, 3, 4, 5, 6}; 
@@ -96,11 +101,25 @@ public class PlayerController : MonoBehaviour
 
 
         cristalText.GetComponent<TMP_Text>().text = cristalCurrency.ToString();
+
+        dots = GameObject.FindGameObjectsWithTag("LifePlayer");
+        
     }
 
-    // Update is called once per frame
+
     void Update()
     {
+        for(int i=0; i<StartLives; i++)
+        {
+            if (i >= lives)
+                dots[i].GetComponent<Image>().enabled = false; 
+        }
+
+        if (lives <= 0)
+        {
+            DeathPlayer();
+        }
+
         movement.x = Input.GetAxisRaw("Horizontal"); 
         movement.y = Input.GetAxisRaw("Vertical");  
 
@@ -213,6 +232,25 @@ public class PlayerController : MonoBehaviour
         {
             yield return new WaitForSeconds(shootReload);
             Shoot(); 
+        }
+    }
+
+    public void TakeDamage() 
+    {
+        lives -= 1; 
+    }
+
+    private void DeathPlayer()
+    {
+        SceneManager.LoadScene("Defeat"); 
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
+        if (other.gameObject.CompareTag("Projectile"))
+        {
+            Destroy(other.gameObject); 
+            TakeDamage(); 
         }
     }
 }

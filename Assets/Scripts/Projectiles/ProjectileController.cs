@@ -8,6 +8,7 @@ public class ProjectileController : MonoBehaviour
     [SerializeField] private GameObject target; 
   
     [SerializeField] private Rigidbody2D r_projectile; 
+    [SerializeField] private PlayerController player; 
     Vector2 lastVelocity; 
 
     void Start() 
@@ -28,10 +29,12 @@ public class ProjectileController : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D other) 
     {
-        var speed = lastVelocity.magnitude; 
-        var direction = Vector2.Reflect(lastVelocity.normalized, other.contacts[0].normal); 
+        if (other.gameObject.CompareTag("Bord"))
+        {
+            var speed = lastVelocity.magnitude; 
+            var direction = Vector2.Reflect(lastVelocity.normalized, other.contacts[0].normal); 
 
-        r_projectile.velocity = direction * Mathf.Max(speed, 2.0f);
-        //transform.Rotate(direction); 
+            r_projectile.velocity = direction * Mathf.Max(speed, 2.0f);
+        }
     }   
 }

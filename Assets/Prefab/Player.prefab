@@ -329,6 +329,18 @@ MonoBehaviour:
   cristalCurrency: 0
   cristalGain: 50
   cristalText: {fileID: 0}
+  lives: 10
+  dots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!60 &2047422893479341995
 PolygonCollider2D:
   m_ObjectHideFlags: 0

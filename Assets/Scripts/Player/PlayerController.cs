@@ -54,6 +54,9 @@ public class PlayerController : MonoBehaviour
     public int cristalCurrency = 500000;
     public int cristalGain = 50; 
     public GameObject cristalText; 
+
+    /* Lives */
+    public int lives = 7; 
                         
 
     enum Color 

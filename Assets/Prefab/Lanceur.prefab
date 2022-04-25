@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 6800983874623213574}
   m_Layer: 7
   m_Name: Lanceur
-  m_TagString: Turret
+  m_TagString: Lanceur
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -6,16 +6,17 @@ public class TurretProjectile : MonoBehaviour
 {
 
     [SerializeField] private Sprite[] sprite_colors; 
+    public int authorizedColor = 1; 
     private string[] layersProjectile;
     private int startingLayerProjectile = 16; 
 
     [SerializeField] private float nbProjectile; 
-    [SerializeField] private float projectileReload; 
+    public float projectileReload; 
     [SerializeField] private GameObject prefabProjectile; 
     [SerializeField] private float projectileSpeed = 2; 
     [SerializeField] private GameObject projectileShooter; 
 
-    private float timeFlick = 0.3f; 
+    public float timeFlick = 0.3f; 
     [SerializeField] private float rotateSpeed = 1f; 
     private Rigidbody2D r; 
 
@@ -23,13 +24,24 @@ public class TurretProjectile : MonoBehaviour
     [SerializeField] private float angleMax = -0.15f;
     [SerializeField] private float angleMin = -0.98f;
     [SerializeField] private bool isGoingRight = true; 
+    public bool canShoot = true; 
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(ShootProjectile()); 
+        
         r = GetComponent<Rigidbody2D>(); 
         layersProjectile = new string[7] {"Projectile_blue", "Projectile_green", "Projectile_navyblue", "Projectile_orange", "Projectile_purple", "Projectile_red", "Projectile_yellow" }; 
+    }
+
+    public void StartShoot() 
+    {
+        StartCoroutine(ShootProjectile()); 
+    }
+
+    public void StartShootFromThrower() 
+    {
+        StartCoroutine(ShootProjectileFromThrower()); 
     }
 
     void Update() 
@@ -62,13 +74,33 @@ public class TurretProjectile : MonoBehaviour
 
     private int getColor() 
     {
-        int c = Random.Range(0, sprite_colors.Length); 
+        int c = Random.Range(0, authorizedColor); 
         return c; 
+    }
+
+    IEnumerator ShootProjectileFromThrower()
+    {
+        yield return new WaitForSeconds(projectileReload);
+            
+        int color = getColor(); 
+        for(int i=0; i < nbProjectile; i++)
+        {
+            GameObject projectile; 
+            projectile = Instantiate(prefabProjectile, projectileShooter.transform.position, Quaternion.identity);
+            projectile.transform.rotation = transform.rotation; 
+            projectile.GetComponent<SpriteRenderer>().sprite = sprite_colors[color]; 
+            projectile.GetComponent<ProjectileController>().speed = projectileSpeed; 
+            projectile.GetComponent<ProjectileController>().ProjectileShoot(); 
+            projectile.layer = startingLayerProjectile + color;
+
+            yield return new WaitForSeconds(timeFlick);
+            
+        }
     }
 
     IEnumerator ShootProjectile() 
     {
-        while(true) 
+        while(canShoot) 
         {
             yield return new WaitForSeconds(projectileReload);
             

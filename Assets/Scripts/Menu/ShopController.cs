@@ -28,8 +28,14 @@ public class ShopController : MonoBehaviour
 
     [SerializeField] private PlayerController playerControl; 
 
+    private AudioSource s; 
+    public AudioClip buy; 
+    public AudioClip error; 
+
     void Start()
     {
+        s = GameObject.Find("Audio").GetComponent<AudioSource>(); 
+
         buttonsUpgrade = new ButtonController[5] {reloadButton, playerSpeedButton, laserSpeedButton, laserSizeButton, cristalGainButton}; 
         buttonsSpaceship = new ButtonShipController[6] {Ship0, Ship1, Ship2,Ship3,Ship4,Ship5}; 
         pricesUpgrade = new int[10] {100, 250, 500, 750, 1000, 1500, 2000, 3000, 4000, 5000}; 
@@ -68,6 +74,7 @@ public class ShopController : MonoBehaviour
             {
                 playerControl.cristalCurrency -= bsc.price; 
                 playerControl.ChangeCrystalUI(); 
+                s.PlayOneShot(buy);
 
                 playerControl.ownSpaceShip[indexButton] = true; 
                 TakeSpaceShip(indexButton); 
@@ -75,7 +82,7 @@ public class ShopController : MonoBehaviour
             }
             else 
             {
-                // Error sound 
+                s.PlayOneShot(error);
             }
         }
         // Pick spaceship
@@ -118,6 +125,7 @@ public class ShopController : MonoBehaviour
 
                 playerControl.cristalCurrency -= bc.price; 
                 playerControl.ChangeCrystalUI(); 
+                s.PlayOneShot(buy);
 
                 // Handle out of range but still upgrade ship
                 if (bc.level+1 == levelMax) bc.UpdatePrice(0); 
@@ -156,11 +164,14 @@ public class ShopController : MonoBehaviour
                         break; 
                 }
             }
+            else 
+            {
+                s.PlayOneShot(error);
+            }
         }
-
         else 
         {
-            // Error sound 
+            s.PlayOneShot(error);
         }
 
     }

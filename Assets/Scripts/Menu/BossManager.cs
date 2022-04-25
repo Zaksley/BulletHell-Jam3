@@ -27,13 +27,11 @@ public class BossManager : MonoBehaviour
 
     public void BossHit() 
     {
-        Debug.Log("hit");
         bossLives -= 1;
 
         if (bossLives <= 0)
         {
-            SceneManager.LoadScene("Win"); 
-            Debug.Log("Win!");
+            SceneManager.LoadScene("Win");
         } 
         else 
         {

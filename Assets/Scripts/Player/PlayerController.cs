@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement; 
 
     
+    /* Sound */
+    public AudioSource s; 
+    public AudioClip shoot; 
+    public AudioClip mainMusic; 
 
     /*  Shoot */ 
     [SerializeField] private GameObject prefabLaser; 
@@ -76,6 +80,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         lives = StartLives; 
+
+        s.PlayOneShot(mainMusic);
 
         r = GetComponent<Rigidbody2D>(); 
         shooters = GameObject.FindGameObjectsWithTag("Shooter"); 
@@ -193,6 +199,8 @@ public class PlayerController : MonoBehaviour
             indexCourbeShoot += nbCourbeShooters[search]; 
             search++; 
         }
+
+        s.PlayOneShot(shoot); 
 
         for(int i=0; i<nbShooters[currentLevel]; i++)
         {

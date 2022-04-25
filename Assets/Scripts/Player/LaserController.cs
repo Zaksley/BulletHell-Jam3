@@ -6,9 +6,17 @@ public class LaserController : MonoBehaviour
 {
 
     public float laserSpeed;
+    public AudioSource s; 
+    public AudioClip hit; 
   
     [SerializeField] private Rigidbody2D r_laser; 
     private GameObject player; 
+
+
+    private void Start() 
+    {
+        s = GameObject.Find("Audio").GetComponent<AudioSource>(); 
+    }
 
     void Update()
     {   
@@ -29,6 +37,8 @@ public class LaserController : MonoBehaviour
 
             player.GetComponent<PlayerController>().cristalCurrency += player.GetComponent<PlayerController>().cristalGain; 
             player.GetComponent<PlayerController>().ChangeCrystalUI(); 
+
+            s.PlayOneShot(hit); 
         }
     }
 }

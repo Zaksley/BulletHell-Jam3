@@ -8,12 +8,17 @@ public class MissileController : MonoBehaviour
     [SerializeField] private float speedMissile; 
     private float maxSpeedMissile = 5f; 
 
+    private AudioSource s; 
+    public AudioClip explosion; 
     
 
     void Start() 
     {
         target = GameObject.Find("Boss"); 
+        s = GameObject.Find("Audio").GetComponent<AudioSource>(); 
     }
+
+    
 
     void Update()
     {
@@ -26,6 +31,7 @@ public class MissileController : MonoBehaviour
         if (transform.position == targetBoss.transform.position)
         {
             Destroy(gameObject);
+            //s.PlayOneShot(explosion);
             target.GetComponent<BossManager>().BossHit(); 
         }
     }

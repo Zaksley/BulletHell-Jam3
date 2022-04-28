@@ -212,7 +212,7 @@ SpriteRenderer:
   m_SortingLayerID: -2100846265
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fde1bfc7e0fe3664c9b2d116be516dd4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 144c46c5c2c236949ab6f4b6d88b1519, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -258,6 +258,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   rotateSpeed: 3
+  s: {fileID: 0}
+  volume: 0.4
+  shoot: {fileID: 8300000, guid: b5b715a1b37e99647a523276160344e5, type: 3}
+  hit: {fileID: 8300000, guid: 2f83ebf12c4083e4b916290e33aed0a7, type: 3}
+  changeColor: {fileID: 8300000, guid: 2dece75ec7de9384bb93bda71a8a9b1f, type: 3}
   prefabLaser: {fileID: 5847773211304273318, guid: d1c236e3409029447a4dd5e32a0fa627,
     type: 3}
   spritesLaser:
@@ -330,6 +335,7 @@ MonoBehaviour:
   cristalGain: 50
   cristalText: {fileID: 0}
   StartLives: 10
+  dots: []
 --- !u!60 &2047422893479341995
 PolygonCollider2D:
   m_ObjectHideFlags: 0

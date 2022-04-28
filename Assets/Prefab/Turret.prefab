@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6262422692333500375}
   - component: {fileID: 1699722448181620831}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: ProjectileShooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 8876203333695428377}
   - component: {fileID: 8876203333695428378}
   - component: {fileID: 8876203333695428376}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Turret
   m_TagString: Turret
   m_Icon: {fileID: 0}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour
 {
     public float speed;
+    private float basicSpeed; 
     [SerializeField] private GameObject target; 
   
     [SerializeField] private Rigidbody2D r_projectile; 
@@ -13,12 +14,13 @@ public class ProjectileController : MonoBehaviour
 
     void Start() 
     {
-        
+        basicSpeed = 2.0f;
     }
 
     void Update()
     {   
         lastVelocity = r_projectile.velocity; 
+
     }
 
     public void ProjectileShoot() 
@@ -34,7 +36,7 @@ public class ProjectileController : MonoBehaviour
             var speed = lastVelocity.magnitude; 
             var direction = Vector2.Reflect(lastVelocity.normalized, other.contacts[0].normal); 
 
-            r_projectile.velocity = direction * Mathf.Max(speed, 2.0f);
+            r_projectile.velocity = direction * Mathf.Max(speed, basicSpeed);
         }
     }   
 }
